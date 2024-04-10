@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
       console.log("person data fetched sucsessfully");
       res.status(200).json(respons);
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.status(501).json(error, "internal server error");
     }
   });
