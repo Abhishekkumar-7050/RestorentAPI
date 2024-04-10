@@ -12,8 +12,8 @@ router.post("/", async (req, res) => {
       const respons = await newPerson.save();
       console.log("save sucsessfully");
       res.status(200).json(respons);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       res.status(501).json(err, "internal server error");
     }
   });
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
       res.status(404).json({error: "invalid workType"});
       }
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.status(501).json(error, "internal server error");
     }
   });
