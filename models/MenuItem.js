@@ -12,7 +12,7 @@ price:{
 },
 taste:{
     type:String,
-    enum:['sweet', 'syicy', 'sour'],
+    enum:['sweet', 'spicy', 'sour'],
     required:true
 },
 is_drink:{
