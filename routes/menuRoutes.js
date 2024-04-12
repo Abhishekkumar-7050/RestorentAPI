@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
       console.log("New menu save sucsessfully");
       res.status(200).json(respons);
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.status(501).json(err, "internal server error");
     }
   });
@@ -23,12 +23,51 @@ router.post("/", async (req, res) => {
       console.log("menuItem fetched Successfully");
       res.status(200).json(respons);
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.status(501).json(err, "internal server error");
     }
   });
 
+  router.put('/:id' , async (req, res) =>{
+    try{
+      const menuIdToUpdate =  req.params.id;
+       const updateToBeData = req.body;
+       const updatedMenu =  await MenuItem.findByIdAndUpdate(menuIdToUpdate,updateToBeData,{
+        new: true , // return updated document
+        runValidators: true // run mongoose validations
+       });
+         if( !updatedMenu){
+            return res.status(500).json("Menu not Found");
+         }
+         else{
+          return res.status(200).json({updateToBeData:"Update Sucessfully"})
+         } 
+    }
+    catch(error){
+      console.log("Inetnal Server Error");
+      return res.status(501).send("Inetnal Server Error");
+    }
 
+  })
+
+  router.delete('/:id', async(req, res) =>{
+try {
+  const idToBeDelete = req.params.id;
+
+const deletedMenu = await Person.findByIdAndDelete(idToBeDelete);
+   if( !deletedMenu){
+      return res.status(500).send(" Mene not present ");
+   }
+   else{
+    return res.status(200).send("Menu Deleted SucessFully");
+   }
+  
+} catch (error) {
+  console.log("Internal server error");
+   return res.status( 501).send("Internal server error");
+}    
+
+  })
 
 
 
